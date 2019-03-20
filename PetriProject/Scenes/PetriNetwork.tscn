@@ -7,7 +7,7 @@
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="PetriNetwork" type="Area2D"]
+[node name="PetriNetwork" type="Area2D" index="0"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -17,11 +17,41 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
+Token = null
+Flag = null
+Npc = null
+Player = null
+Place = null
+Transition = null
+Connection = null
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
 shape = SubResource( 1 )
+
+[node name="Tokens" type="Node" parent="." index="2"]
+
+[node name="Flags" type="Node" parent="." index="3"]
+
+[node name="Npcs" type="Node" parent="." index="4"]
+
+[node name="Players" type="Node" parent="." index="5"]
+
+[node name="Places" type="Node" parent="." index="6"]
+
+[node name="Transitions" type="Node" parent="." index="7"]
+
+[node name="Connections" type="Node" parent="." index="8"]
+
+[node name="StepTimer" type="Timer" parent="." index="9"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = true
+
+[connection signal="timeout" from="StepTimer" to="." method="_on_StepTimer_timeout"]
 
 
