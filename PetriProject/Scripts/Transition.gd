@@ -1,5 +1,7 @@
 extends Area2D
 
+var token_list = Array()
+
 var id = null
 
 var connInList = Array()
@@ -37,3 +39,6 @@ func get_connection_entrances():
 
 func get_connection_exits():
 	return connOutList
+
+func check_token_amount():
+	return token_list.size()

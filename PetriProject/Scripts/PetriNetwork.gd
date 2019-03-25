@@ -17,18 +17,34 @@ var columns = 3
 
 var cicle_time = 1
 
+#Remember the difference!
+#--PLACES--TRANSITIONS--CONNECTIONS
+#PLACES: Hold tokens. Passive like that.
+#TRANSITIONS: Always in between the places. Serves as a checkpoint for the connections to work with.
+#CONNECTIONS: Kindda guide the whole network. In a "pulse", it will check all connections in order to see if 
+#There are avaliable transitions to be made (Enough tokens, respecting the transitions and whatnot.) 
+
 func _ready():
-	var matrix = []
+	pass
+
+func start_matrix_size(_lines, _columns):
+	
+	lines = _lines
+	columns = _columns
+	
+	matrix = []
 	
 	for x in range(lines):
 		var col = []
 		col.resize(columns)
 		matrix.append(col)
 		pass
-	#Use this in order to populate it...
 	
-	matrix[0][0] = 4
-	print(matrix[0][0])
+	print("Matrix of the game has been started\nLines: " , _lines, "\nColumns: " , _columns)
+	
+	#Populate it like so...
+	#matrix[0][0] = 4
+	#print(matrix[0][0])
 	pass
 
 #------All these functions work as to permit creating and editing of the network.
@@ -38,6 +54,7 @@ func createPlace(_line, _column):
 	var newPlace = Place.instance()
 	matrix[_line][_column] = newPlace
 	$Places.add_child(newPlace)
+	print("A new place has been created at location : ", _line , " X ", _column)
 	#Should add a better positioning system at a later date.
 	pass
 
@@ -50,13 +67,17 @@ func removePlace(_line, _column):#Removes and puts NULLPTR on that position of t
 #Speaking of transitions, i guess they are gonna be put on its own dictionary, in order to better access them.
 func createTransition(_id):
 	#Creates a transition that connects two PLACES!
+	var new_id = _id
 	var newTransition = Transition.instance()
 	$Transitions.add_child(newTransition)
 	#Still no idea on the logics behind the IDS....maybe it WOULD be easier to just add them to a dictionary. Hmmm...how about....
 	if _id == null:#If for some reason a manual ID wasnt put...
 		newTransition.set_id($Transitions.get_child_count() - 1)
+		new_id = $Transitions.get_child_count() - 1
 	else:
 		newTransition.set_id(_id)
+	
+	print("A new transition has been created. Its current ID is: " , new_id)
 	pass
 
 func removeTransition(_id):
@@ -105,6 +126,13 @@ func createConnection(_place, _transition, _int_weight, _bool_is_entrance, _bool
 	#Here it should ALSO warn both the _place and the _transition about this connection...
 	#the _transition needs to have 2 arrays, one for each connection type......so....
 	_transition.add_connection_to_list(newConnection)
+	print("Created a connection between place: " , _place.name, " and transition: " , _transition.name)
+	print("Its weight is: " , _int_weight)
+	
+	if _bool_is_entrance:
+		print("Its a connection from a transition to place!")
+	else:
+		print("Its a connection from a place to transition!")
 	
 	pass
 
@@ -203,7 +231,11 @@ func load_network(_string_file_name):
 	pass
 
 func execute_cicle():
-	#Goes through out all the network identifying all transitions that are active, and executing them. The movement of Tokens and signal of each transition could
+	#Goes through out all the network identifying all TRANSITIONS that are active, and executing them.
+	for i in $Transitions.get_children():
+		#Use a method from each transition! if its avaliable, EXECUTE IT!
+		pass
+	#The movement of Tokens and signal of each transition could
 	#mean the calling of methods of call back so it can be seen on screen.
 	
 	#This is what SHOULD be working by the time you make the delivery.
@@ -214,3 +246,11 @@ func _on_StepTimer_timeout():
 	#Use this function to call execute_cicle! That way, the steps are separated in chunks of time.
 	execute_cicle()
 	pass # replace with function body
+
+#I have a feeling i will need these...
+func start_PetriNetwork():
+	$StepTimer.start()
+	print("PetriNetwork has been STARTED")
+func stop_PetriNetwork():
+	$StepTimer.stop()
+	print("PetriNetwork has been STOPPED")

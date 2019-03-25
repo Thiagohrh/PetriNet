@@ -18,5 +18,7 @@ func get_token(_index):
 
 func add_token(_token):
 	token_list.push_back(_token)
-	
 	pass
+
+func check_token_amount():
+	return token_list.size()

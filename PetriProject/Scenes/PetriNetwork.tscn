@@ -1,6 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/PetriNetwork.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Tokens/Token.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Tokens/Flag.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Tokens/Npc.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Tokens/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Place.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Transition.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Connection.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -17,13 +24,13 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
-Token = null
-Flag = null
-Npc = null
-Player = null
-Place = null
-Transition = null
-Connection = null
+Token = ExtResource( 2 )
+Flag = ExtResource( 3 )
+Npc = ExtResource( 4 )
+Player = ExtResource( 5 )
+Place = ExtResource( 6 )
+Transition = ExtResource( 7 )
+Connection = ExtResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
@@ -50,7 +57,7 @@ shape = SubResource( 1 )
 process_mode = 1
 wait_time = 1.0
 one_shot = false
-autostart = true
+autostart = false
 
 [connection signal="timeout" from="StepTimer" to="." method="_on_StepTimer_timeout"]
 
