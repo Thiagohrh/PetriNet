@@ -178,10 +178,15 @@ func get_all_exit_connections(_id):
 
 #---------------------------------These functions work as to permit modifications/inspections of the network.
 
-func insert_token_in_place(_token, _place):
-	#Do i even need these?
-	#Like..._token...ill create that....
-	#_place...well it would be nice to know where should i put the new token...hmmm...
+func insert_token_in_place(_line, _column):
+	
+	if matrix[_line][_column] != null:
+		var new_token = Token.instance()
+		$Tokens.add_child(new_token)
+		matrix[_line][_column].add_token(new_token)
+	else:
+		print("Trying to add a token in an empty cell")
+	
 	pass
 
 func remove_token_from_place(_token, _place):
@@ -234,12 +239,16 @@ func execute_cicle():
 	#Goes through out all the network identifying all TRANSITIONS that are active, and executing them.
 	for i in $Transitions.get_children():
 		#Use a method from each transition! if its avaliable, EXECUTE IT!
+		if i.check_avaliability():
+			print("Connection " , i.name, " is avaliable!")
+			i.execute_transition()
+			pass
 		pass
 	#The movement of Tokens and signal of each transition could
 	#mean the calling of methods of call back so it can be seen on screen.
 	
 	#This is what SHOULD be working by the time you make the delivery.
-	print("CICLE!")
+	print("----------------------CICLE!----------------------")
 	pass
 
 func _on_StepTimer_timeout():

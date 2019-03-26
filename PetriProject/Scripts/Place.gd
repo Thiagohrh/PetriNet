@@ -16,8 +16,22 @@ func get_token(_index):
 		return null
 	pass
 
+func get_token_from_this_place():
+	#Returns a token from here, also removing it from thos domain.
+	if !token_list.empty():
+		
+		var token_reference = token_list.front()
+		token_list.pop_front()
+		print("A token has been removed from " , name)
+		return token_reference
+		pass
+	else:
+		return null
+	pass
+
 func add_token(_token):
 	token_list.push_back(_token)
+	print("A token has been added to " , name)
 	pass
 
 func check_token_amount():

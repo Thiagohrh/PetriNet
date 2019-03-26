@@ -18,10 +18,15 @@ func _ready():
 	$PetriNetwork.createTransition(0)
 	
 	#Create a CONNECTION that should bridge the first PLACE to the first TRANSITION
-	$PetriNetwork.createConnection($PetriNetwork.getPlace(0, 0),$PetriNetwork.getTransition(0),1,false,false)
+	$PetriNetwork.createConnection($PetriNetwork.getPlace(0, 0),$PetriNetwork.getTransition(0),1,true,false)
 	#Create another CONNECTION, that should bridge the first TRANSITION to the second PLACE
-	$PetriNetwork.createConnection($PetriNetwork.getPlace(0, 1),$PetriNetwork.getTransition(0),1,true,false)
+	$PetriNetwork.createConnection($PetriNetwork.getPlace(0, 1),$PetriNetwork.getTransition(0),1,false,false)
 	
+	#Put a single token on the first transition in order to test the petriNetwork...
+	$PetriNetwork.insert_token_in_place(0,0)
+	
+	print("---------------------SETUP DONE--------------------------")
+	print("------------------STARTING NETWORK!--------------------------")
 	#Start the timer with this, and see what happens...
 	$PetriNetwork.start_PetriNetwork()
 	pass
@@ -30,3 +35,7 @@ func _ready():
 func _input(event):
 	if Input.is_key_pressed(KEY_ESCAPE):
 		get_tree().quit()
+	
+	if Input.is_key_pressed(KEY_S):
+		$PetriNetwork.stop_PetriNetwork()
+	
