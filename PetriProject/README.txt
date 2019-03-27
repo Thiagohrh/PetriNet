@@ -1,3 +1,5 @@
+Made using Godot 3.0.5
+
 A Petri Network implementation.
 
 When you run it, the _ready() function assembles a basic network using custom functions. 
