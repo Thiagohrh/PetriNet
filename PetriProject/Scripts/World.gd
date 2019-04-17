@@ -1,11 +1,16 @@
 extends Node
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+onready var cell_automata_node = get_node("CAutomata")
+
+func _process(delta):
+	pass
+
 
 func _ready():
 	#Should assemble all of the network in here, as a sequencial instruction. The PetriNetwork will do the rest...
+	#Get this and pass it to the PetriNetwork node in order to instantiate the places in the correct grid.
+	var map_grid = cell_automata_node.start_map_creation()
+	
 	print("--------------------EXECUTING PROGRAM----------------------")
 	#Starting the world matrix, with a grid of 3X3
 	$PetriNetwork.start_matrix_size(3,3)
@@ -24,11 +29,14 @@ func _ready():
 	
 	#Put a single token on the first transition in order to test the petriNetwork...
 	$PetriNetwork.insert_token_in_place(0,0)
+	$PetriNetwork.insert_token_in_place(0,0)
 	
 	print("---------------------SETUP DONE--------------------------")
-	print("------------------STARTING NETWORK!--------------------------")
+	print("------------------STARTING NETWORK!----------------------")
 	#Start the timer with this, and see what happens...
-	$PetriNetwork.start_PetriNetwork()
+	
+	#Lets not start the timer by now...what we need to do is create a 30 X 30 matrix, and create all the connections it needs.
+	#$PetriNetwork.start_PetriNetwork()
 	pass
 
 #A basic exit strategy

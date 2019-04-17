@@ -10,6 +10,8 @@ export (PackedScene) var Transition
 export (PackedScene) var Connection
 #Should have some prefabs here...
 
+const CELL_HEIGHT = 16
+const CELL_WIDTH = 16
 
 var matrix
 var lines = 3
