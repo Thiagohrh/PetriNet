@@ -29,6 +29,45 @@ var cicle_time = 1
 func _ready():
 	pass
 
+func start_board(_map_grid):
+	lines = _map_grid.size()
+	columns = _map_grid[0].size()
+	
+	matrix = Array()
+	matrix.resize(columns)
+	
+	for i in range(columns):
+		matrix[i] = Array()
+		matrix[i].resize(lines)
+		
+	#Now after creating the matrix...to populate it...
+	for x in range(matrix.size()):
+		for y in range(matrix[0].size()):
+			var new_place = Place.instance()
+			
+			matrix[x][y] = new_place
+			$Places.add_child(new_place)
+			#Also should put it into its correct place...and set it to be accessible or not.
+			new_place.global_position.x = 0 + x * CELL_WIDTH
+			new_place.global_position.y = 0 + y * CELL_HEIGHT
+			if _map_grid[x][y] == 1:
+				matrix[x][y].set_avaliable(false)
+	
+	#Now i should create the transitions between all of those places...hmmm...
+	for x in range(matrix.size()):
+		for y in range(matrix[0].size()):
+			var pos_to_connect = {}
+			pos_to_connect.Right = x + 1
+			pos_to_connect.Left = x - 1
+			pos_to_connect.Up = y - 1
+			pos_to_connect.Down = y + 1
+			
+			#matrix[x][y]
+			pass
+	#print("Lines: " , lines, " Columns: ", columns)
+	pass
+
+
 func start_matrix_size(_lines, _columns):
 	
 	lines = _lines

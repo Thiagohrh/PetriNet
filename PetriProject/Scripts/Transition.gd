@@ -12,7 +12,6 @@ func _ready():
 	# Initialization here
 	pass
 
-
 func set_id(_id):
 	id = _id
 
@@ -47,6 +46,7 @@ func check_avaliability():
 		var amount_of_tokens_exiting = 0
 		
 		var n_connections_IN_avaliable = 0
+		var n_connections_OUT_avaliable = 0
 		
 		#Check how much can i get from the entering connections...
 		for i in connInList:
@@ -61,7 +61,9 @@ func check_avaliability():
 		
 		#Checks how much i should pass along for the exiting connections...
 		for i in connOutList:
-			amount_of_tokens_exiting += i.get_Weight()
+			if i.check_if_its_avaliable():
+				amount_of_tokens_exiting += i.get_Weight()
+				n_connections_OUT_avaliable += 1
 			pass
 		
 		print("connInList.size(): " , connInList.size())
@@ -70,12 +72,10 @@ func check_avaliability():
 		print("Amount exiting: " , amount_of_tokens_exiting)
 		#If I have more tokens avaliable than tokens that i need to output, and all my connections
 		# IN are avaliable..then this transition is avaliable!
-		if amount_of_tokens_entering >= amount_of_tokens_exiting and n_connections_IN_avaliable == connInList.size():
+		if n_connections_IN_avaliable > 0 and n_connections_OUT_avaliable > 0:
 			return true
-			pass
 		else:
 			return false
-		pass
 	else:
 		return false
 

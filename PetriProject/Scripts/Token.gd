@@ -4,6 +4,7 @@ var cell_size = 32
 var possessed_by = null
 
 func _ready():
+	$AnimationPlayer.play("Idle")
 	pass
 
 #func _process(delta):

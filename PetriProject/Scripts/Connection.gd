@@ -51,9 +51,12 @@ func check_if_its_avaliable():
 	if is_entrance: #If should go from PLACE to TRANSITION...
 		#Check how many tokens the PLACE has...
 		#print("Place currently has..." , place.check_token_amount())
-		if place.check_token_amount() >= weight: #If the number that the place has is LESS than what this needs...
+		if place.check_token_amount() >= weight and place.check_avaliable(): #If the number that the place has is LESS than what this needs...
 			return true
 		else:
 			return false
 		pass
+	else:
+		if place.check_avaliable():
+			return true
 	pass

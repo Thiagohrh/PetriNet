@@ -27,7 +27,7 @@ shape = SubResource( 1 )
 
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 64, 112, 16, 16 )
-_sections_unfolded = [ "Animation", "Offset", "Region" ]
+region_rect = Rect2( 32, 80, 16, 16 )
+_sections_unfolded = [ "Animation", "Offset", "Region", "Visibility" ]
 
 

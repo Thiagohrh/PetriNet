@@ -11,25 +11,27 @@ func _ready():
 	#Get this and pass it to the PetriNetwork node in order to instantiate the places in the correct grid.
 	var map_grid = cell_automata_node.start_map_creation()
 	
+	$PetriNetwork.start_board(map_grid)
+	
 	print("--------------------EXECUTING PROGRAM----------------------")
 	#Starting the world matrix, with a grid of 3X3
-	$PetriNetwork.start_matrix_size(3,3)
+	#$PetriNetwork.start_matrix_size(3,3)
 	#Create a place in location 0, 0
-	$PetriNetwork.createPlace(0, 0)
+	#$PetriNetwork.createPlace(0, 0)
 	#Create a second place in location 0,1
-	$PetriNetwork.createPlace(0, 1)
+	#$PetriNetwork.createPlace(0, 1)
 	
 	#Create a TRANSITION between those two places!
-	$PetriNetwork.createTransition(0)
+	#$PetriNetwork.createTransition(0)
 	
 	#Create a CONNECTION that should bridge the first PLACE to the first TRANSITION
-	$PetriNetwork.createConnection($PetriNetwork.getPlace(0, 0),$PetriNetwork.getTransition(0),1,true,false)
+	#$PetriNetwork.createConnection($PetriNetwork.getPlace(0, 0),$PetriNetwork.getTransition(0),1,true,false)
 	#Create another CONNECTION, that should bridge the first TRANSITION to the second PLACE
-	$PetriNetwork.createConnection($PetriNetwork.getPlace(0, 1),$PetriNetwork.getTransition(0),1,false,false)
+	#$PetriNetwork.createConnection($PetriNetwork.getPlace(0, 1),$PetriNetwork.getTransition(0),1,false,false)
 	
 	#Put a single token on the first transition in order to test the petriNetwork...
-	$PetriNetwork.insert_token_in_place(0,0)
-	$PetriNetwork.insert_token_in_place(0,0)
+	#$PetriNetwork.insert_token_in_place(0,0)
+	#$PetriNetwork.insert_token_in_place(0,0)
 	
 	print("---------------------SETUP DONE--------------------------")
 	print("------------------STARTING NETWORK!----------------------")

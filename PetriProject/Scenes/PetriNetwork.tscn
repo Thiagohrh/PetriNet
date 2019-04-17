@@ -44,9 +44,13 @@ shape = SubResource( 1 )
 
 [node name="Npcs" type="Node" parent="." index="4"]
 
-[node name="Players" type="Node" parent="." index="5"]
+[node name="Places" type="Node" parent="." index="5"]
 
-[node name="Places" type="Node" parent="." index="6"]
+[node name="Players" type="Node" parent="." index="6"]
+
+[node name="Player" parent="Players" index="0" instance=ExtResource( 5 )]
+
+position = Vector2( 326.351, 178.355 )
 
 [node name="Transitions" type="Node" parent="." index="7"]
 
