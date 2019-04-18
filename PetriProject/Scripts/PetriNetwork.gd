@@ -54,6 +54,7 @@ func start_board(_map_grid):
 				matrix[x][y].set_avaliable(false)
 	
 	#Now i should create the transitions between all of those places...hmmm...
+	#The theory is to just create transitions of ENTERING another place...so...hmmm....
 	for x in range(matrix.size()):
 		for y in range(matrix[0].size()):
 			var pos_to_connect = {}
@@ -62,11 +63,35 @@ func start_board(_map_grid):
 			pos_to_connect.Up = y - 1
 			pos_to_connect.Down = y + 1
 			
+			
+			
+			for neighbourX in range(x - 1, x + 2):
+				for neighbourY in range(y - 1, y + 2):
+					if neighbourX >= 0 && neighbourX < matrix.size() && neighbourY >= 0 && neighbourY < matrix[0].size():
+						if neighbourX != x || neighbourY != y:
+							#wallCount += map[neighbourX][neighbourY]
+							create_transition_from_to(matrix[x][y], matrix[neighbourX][neighbourY])
+							pass
+			
+			
+			
 			#matrix[x][y]
 			pass
 	#print("Lines: " , lines, " Columns: ", columns)
 	pass
 
+func create_transition_from_to(_from, _to):
+	#First, create a transition....
+	var new_transition = createTransition(null)
+	
+	#Second, create a CONNECTION, from the PLACE to the TRANSITION.
+	createConnection(_from, new_transition ,1 , true, false)
+	#Third, create a CONNECTION from the TRANSITION to the PLACE
+	createConnection(_to, new_transition, 1, false, false)
+	
+	#Maybe should add to the transition its DESTINATION, as to better check where it leads to....
+	
+	pass
 
 func start_matrix_size(_lines, _columns):
 	
@@ -119,7 +144,7 @@ func createTransition(_id):
 		newTransition.set_id(_id)
 	
 	print("A new transition has been created. Its current ID is: " , new_id)
-	pass
+	return newTransition
 
 func removeTransition(_id):
 	#Should remove the transition with a certain ID
