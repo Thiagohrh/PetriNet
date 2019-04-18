@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/123 - Sub Time.ogg-41fee767346056173c1c3b7a2d6d2801.oggstr"
+
+[deps]
+
+source_file="res://Sounds/Music from Travis/123 - Sub Time.ogg"
+dest_files=[ "res://.import/123 - Sub Time.ogg-41fee767346056173c1c3b7a2d6d2801.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

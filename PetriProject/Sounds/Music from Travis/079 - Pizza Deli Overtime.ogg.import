@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/079 - Pizza Deli Overtime.ogg-4e056a4794b7f87b413be130f49a0847.oggstr"
+
+[deps]
+
+source_file="res://Sounds/Music from Travis/079 - Pizza Deli Overtime.ogg"
+dest_files=[ "res://.import/079 - Pizza Deli Overtime.ogg-4e056a4794b7f87b413be130f49a0847.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

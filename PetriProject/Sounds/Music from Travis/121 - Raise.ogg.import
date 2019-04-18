@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/121 - Raise.ogg-6247dc57ad1cf6b13a027ea7f6babcc7.oggstr"
+
+[deps]
+
+source_file="res://Sounds/Music from Travis/121 - Raise.ogg"
+dest_files=[ "res://.import/121 - Raise.ogg-6247dc57ad1cf6b13a027ea7f6babcc7.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

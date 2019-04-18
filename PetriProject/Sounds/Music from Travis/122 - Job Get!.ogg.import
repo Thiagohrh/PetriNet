@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/122 - Job Get!.ogg-2323f0d848a865321f4a51901092b441.oggstr"
+
+[deps]
+
+source_file="res://Sounds/Music from Travis/122 - Job Get!.ogg"
+dest_files=[ "res://.import/122 - Job Get!.ogg-2323f0d848a865321f4a51901092b441.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
