@@ -1,13 +1,9 @@
-Made using Godot 3.0.5
+Made using Godot 3.0.5. 
 
-A Petri Network implementation.
+A Petri Network implementation on a game setting.
 
-When you run it, the _ready() function assembles a basic network using custom functions. 
+Arrow Keys move the character. If you move, you also send a signal for the enemies to move randomly as well.
 
-It creates two places, one transition between them, and two connections (from one place INTO the connection, from the connection into the second place.)
+You can move the viewport with the middle mouse button, and get a close up using the mouse wheel scroll. Maximize it for true throwback feels.
 
-It then puts a single token on the first place.
-
-The network then start cicling trough all of its Transition nodes (once per second), checking if they are avaliable. If they are, the are executed!
-
-You can follow the progress of everything through text output. Though it IS better to check the whole code for a better idea of where everything is.
+The transitions dictionary is always used to check if the connection between places is avaliable, as well as to check that the place isnt occupied.
