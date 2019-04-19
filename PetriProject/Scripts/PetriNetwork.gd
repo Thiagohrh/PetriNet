@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 
 #Should have some prefabs here...
 export (PackedScene) var Token
@@ -19,12 +19,17 @@ var columns = 3
 
 var cicle_time = 1
 
+var main_character = null
 #Remember the difference!
 #--PLACES--TRANSITIONS--CONNECTIONS
 #PLACES: Hold tokens. Passive like that.
 #TRANSITIONS: Always in between the places. Serves as a checkpoint for the connections to work with.
 #CONNECTIONS: Kindda guide the whole network. In a "pulse", it will check all connections in order to see if 
 #There are avaliable transitions to be made (Enough tokens, respecting the transitions and whatnot.) 
+
+#New rule. Fuck that noise. Lets simplify it using dictionaries.
+
+var ConnectionsDir = {} #A dictionary, made to hold all the info about transitions.
 
 func _ready():
 	pass
@@ -44,7 +49,7 @@ func start_board(_map_grid):
 	for x in range(matrix.size()):
 		for y in range(matrix[0].size()):
 			var new_place = Place.instance()
-			
+			new_place.set_identity(x,y)
 			matrix[x][y] = new_place
 			$Places.add_child(new_place)
 			#Also should put it into its correct place...and set it to be accessible or not.
@@ -64,34 +69,69 @@ func start_board(_map_grid):
 			pos_to_connect.Down = y + 1
 			
 			
-			
+			#This connects to 8 possible places around. Change it to only 4 later, as seen above.
 			for neighbourX in range(x - 1, x + 2):
 				for neighbourY in range(y - 1, y + 2):
 					if neighbourX >= 0 && neighbourX < matrix.size() && neighbourY >= 0 && neighbourY < matrix[0].size():
 						if neighbourX != x || neighbourY != y:
-							#wallCount += map[neighbourX][neighbourY]
-							#create_transition_from_to(matrix[x][y], matrix[neighbourX][neighbourY])
+							create_transition_from_to(matrix[x][y], matrix[neighbourX][neighbourY])
 							pass
 			
-			
-			
-			#matrix[x][y]
 			pass
-	#print("Lines: " , lines, " Columns: ", columns)
+	
+	set_player_on_board()
+	#And to test how to access it.... lets do....
+	print("The Amount of connections from Place 1 X 1 is...: ", ConnectionsDir[matrix[1][1]].size())
+	#print("The Weight of the transition between 0 X 0 and  1 X 0 is: ", ConnectionsDir[matrix[0][0]][matrix[1][0]].Weight)
 	pass
 
 func create_transition_from_to(_from, _to):
+	#First calculate all the data thats needed to add to this particular connection.
+	var data = {
+		"Weight" : 1,
+		"Inhibitor" : false,
+		"Start" : _from,
+		"End" : _to,
+		"Enabled" : true
+	}
+	
+	if !ConnectionsDir.has(_from):
+		ConnectionsDir[_from] = {}
+	
+	ConnectionsDir[_from][_to] = data
+	#-------------Fuck all this noise below. Start above and delete the rest.-----------------------------
 	#First, create a transition....
-	var new_transition = createTransition(null)
+	#var new_transition = createTransition(null)
 	
 	#Second, create a CONNECTION, from the PLACE to the TRANSITION.
-	createConnection(_from, new_transition ,1 , true, false)
+	#createConnection(_from, new_transition ,1 , true, false)
 	#Third, create a CONNECTION from the TRANSITION to the PLACE
-	createConnection(_to, new_transition, 1, false, false)
+	#createConnection(_to, new_transition, 1, false, false)
 	
 	#Maybe should add to the transition its DESTINATION, as to better check where it leads to....
 	
 	pass
+
+func set_player_on_board():
+	#Set one instance of the player on the board. Also keeps a reference to it in order know its location. Easier to ask from him.
+	main_character = Player.instance()
+	$Players.add_child(main_character)
+	
+	#In order to figure out where it should be....
+	var target_place = get_first_avaliable_position()
+	
+	target_place.add_token(main_character)
+	#main_character.set_position_on_grid()
+	pass
+
+func get_first_avaliable_position():
+	for x in range(matrix.size()):
+		for y in range(matrix[0].size()):
+			if matrix[x][y].check_avaliable():
+				return matrix[x][y]
+			pass
+	
+	return null
 
 func start_matrix_size(_lines, _columns):
 	

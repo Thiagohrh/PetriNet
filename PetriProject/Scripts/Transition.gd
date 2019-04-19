@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 
 var token_list = Array()
 
