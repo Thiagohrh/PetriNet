@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Tokens/Token.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/16x16_Jerom_CC-BY-SA-3.0.png" type="Texture" id=3]
+
+[node name="Enemy" instance=ExtResource( 1 )]
+
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 144, 304, 16, 16 )
+_sections_unfolded = [ "Region", "Transform" ]
+
+

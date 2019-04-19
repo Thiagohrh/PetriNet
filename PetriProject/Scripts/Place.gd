@@ -50,7 +50,7 @@ func add_token(_token):
 	if avaliable:
 		token_list.push_back(_token)
 		print("A token has been added to " , name)
-		if _token.is_in_group("player"):
+		if _token.is_in_group("player") or _token.is_in_group("enemy"):
 			_token.set_position_on_grid(pos_identity.x, pos_identity.y)
 			_token.set_destination_node(self)
 			pass

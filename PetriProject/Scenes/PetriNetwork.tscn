@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/PetriNetwork.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Tokens/Token.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scenes/Place.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Transition.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Connection.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Tokens/Enemy.tscn" type="PackedScene" id=9]
 
 [node name="PetriNetwork" type="Node2D" index="0"]
 
@@ -19,16 +20,17 @@ Player = ExtResource( 5 )
 Place = ExtResource( 6 )
 Transition = ExtResource( 7 )
 Connection = ExtResource( 8 )
+Enemy = ExtResource( 9 )
 
 [node name="Tokens" type="Node" parent="." index="0"]
 
 [node name="Flags" type="Node" parent="." index="1"]
 
-[node name="Npcs" type="Node" parent="." index="2"]
+[node name="Places" type="Node" parent="." index="2"]
 
-[node name="Places" type="Node" parent="." index="3"]
+[node name="Players" type="Node" parent="." index="3"]
 
-[node name="Players" type="Node" parent="." index="4"]
+[node name="Enemies" type="Node" parent="." index="4"]
 
 [node name="Transitions" type="Node" parent="." index="5"]
 

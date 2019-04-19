@@ -13,7 +13,7 @@ func _ready():
 	
 	$PetriNetwork.start_board(map_grid)
 	
-	print("--------------------EXECUTING PROGRAM----------------------")
+	#print("--------------------EXECUTING PROGRAM----------------------")
 	#Starting the world matrix, with a grid of 3X3
 	#$PetriNetwork.start_matrix_size(3,3)
 	#Create a place in location 0, 0
@@ -33,8 +33,8 @@ func _ready():
 	#$PetriNetwork.insert_token_in_place(0,0)
 	#$PetriNetwork.insert_token_in_place(0,0)
 	
-	print("---------------------SETUP DONE--------------------------")
-	print("------------------STARTING NETWORK!----------------------")
+	#print("---------------------SETUP DONE--------------------------")
+	#print("------------------STARTING NETWORK!----------------------")
 	#Start the timer with this, and see what happens...
 	
 	#Lets not start the timer by now...what we need to do is create a 30 X 30 matrix, and create all the connections it needs.

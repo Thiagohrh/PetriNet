@@ -8,6 +8,7 @@ export (PackedScene) var Player
 export (PackedScene) var Place
 export (PackedScene) var Transition
 export (PackedScene) var Connection
+export (PackedScene) var Enemy
 #Should have some prefabs here...
 
 const CELL_HEIGHT = 16
@@ -80,6 +81,7 @@ func start_board(_map_grid):
 			pass
 	
 	set_player_on_board()
+	set_enemies_on_board(2)
 	#And to test how to access it.... lets do....
 	print("The Amount of connections from Place 1 X 1 is...: ", ConnectionsDir[matrix[1][1]].size())
 	#print("The Weight of the transition between 0 X 0 and  1 X 0 is: ", ConnectionsDir[matrix[0][0]][matrix[1][0]].Weight)
@@ -147,13 +149,58 @@ func move_player(_direction):
 		print("Checked and....its avaliable!")
 		#Ok, so i know its avaliable...hmmm...
 		var connection_info = ConnectionsDir[matrix[current_position.x][current_position.y]][matrix[desired_position.x][desired_position.y]]
+		if connection_info.End.check_token_amount() == 0:
+			var current_token = connection_info.Start.get_token_from_this_place()
+			connection_info.End.add_token(current_token)
+		pass
+	
+	move_enemies()
+	pass
+
+func set_enemies_on_board(_amount):
+	for i in range(_amount):
+		#Should grab a random position on the board...that position should be avaliable, and shouldnt have any tokens on it.
+		randomize()
+		var x = randi() % matrix.size()
+		var y = randi() % matrix[0].size()
+		print("Would spawn at position X: " , x, " Y: " , y)
+		var chosen_place = matrix[x][y]
+		#A safety check just so it doesnt spawn at an unavaliable place
+		if !chosen_place.check_avaliable():
+			while !chosen_place.check_avaliable():
+				x = randi() % matrix.size()
+				y = randi() % matrix[0].size()
+				chosen_place = matrix[x][y]
+				pass
+			pass
 		
-		var current_token = connection_info.Start.get_token_from_this_place()
-		connection_info.End.add_token(current_token)
+		var new_enemy = Enemy.instance()
+		$Enemies.add_child(new_enemy)
 		
+		chosen_place.add_token(new_enemy)
 		pass
 	pass
 
+func move_enemies():
+	var all_enemies = $Enemies.get_children()
+	for i in all_enemies:
+		var current_position = i.get_position_on_grid()
+		var desired_position = i.get_position_on_grid() + i.get_new_direction_intent()
+		
+		print("The Enemy is in position: ",current_position, " and wants to go to position: " , desired_position)
+		
+		#Ok, so far so good...now....in order to check that particular transition....
+		if ConnectionsDir[matrix[current_position.x][current_position.y]][matrix[desired_position.x][desired_position.y]].Enabled:
+			print("Checked and....its avaliable!")
+			#Ok, so i know its avaliable...hmmm...
+			
+			var connection_info = ConnectionsDir[matrix[current_position.x][current_position.y]][matrix[desired_position.x][desired_position.y]]
+			if connection_info.End.check_token_amount() == 0:
+				var current_token = connection_info.Start.get_token_from_this_place()
+				connection_info.End.add_token(current_token)
+			
+		pass
+	pass
 
 func start_matrix_size(_lines, _columns):
 	
