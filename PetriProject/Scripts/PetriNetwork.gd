@@ -70,7 +70,7 @@ func start_board(_map_grid):
 					if neighbourX >= 0 && neighbourX < matrix.size() && neighbourY >= 0 && neighbourY < matrix[0].size():
 						if neighbourX != x || neighbourY != y:
 							#wallCount += map[neighbourX][neighbourY]
-							create_transition_from_to(matrix[x][y], matrix[neighbourX][neighbourY])
+							#create_transition_from_to(matrix[x][y], matrix[neighbourX][neighbourY])
 							pass
 			
 			

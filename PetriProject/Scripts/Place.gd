@@ -18,7 +18,8 @@ func get_pos_identity():
 
 func set_avaliable(_avaliable):
 	avaliable = _avaliable
-	modulate = Color(0.5,0.5,0.5,1)
+	if !_avaliable:
+		modulate = Color(0.5,0.5,0.5,1)
 
 func check_avaliable():
 	return avaliable
