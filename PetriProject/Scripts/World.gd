@@ -49,3 +49,11 @@ func _input(event):
 	if Input.is_key_pressed(KEY_S):
 		$PetriNetwork.stop_PetriNetwork()
 	
+	if Input.is_action_just_pressed("ui_up"):
+		$PetriNetwork.move_player(Vector2(0,-1))
+	elif Input.is_action_just_pressed("ui_down"):
+		$PetriNetwork.move_player(Vector2(0,1))
+	elif Input.is_action_just_pressed("ui_left"):
+		$PetriNetwork.move_player(Vector2(-1,0))
+	elif Input.is_action_just_pressed("ui_right"):
+		$PetriNetwork.move_player(Vector2(1,0))

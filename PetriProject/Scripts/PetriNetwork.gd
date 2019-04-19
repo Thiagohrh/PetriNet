@@ -92,7 +92,7 @@ func create_transition_from_to(_from, _to):
 		"Inhibitor" : false,
 		"Start" : _from,
 		"End" : _to,
-		"Enabled" : true
+		"Enabled" : _to.check_avaliable()
 	}
 	
 	if !ConnectionsDir.has(_from):
@@ -132,6 +132,28 @@ func get_first_avaliable_position():
 			pass
 	
 	return null
+
+func move_player(_direction):
+	print("Direction is: ", _direction)
+	#First, get the player actual position...
+	
+	var current_position = main_character.get_position_on_grid()
+	var desired_position = main_character.get_position_on_grid() + _direction
+	
+	print("The player is in position: ",current_position, " and wants to go to position: " , desired_position)
+	
+	#Ok, so far so good...now....in order to check that particular transition....
+	if ConnectionsDir[matrix[current_position.x][current_position.y]][matrix[desired_position.x][desired_position.y]].Enabled:
+		print("Checked and....its avaliable!")
+		#Ok, so i know its avaliable...hmmm...
+		var connection_info = ConnectionsDir[matrix[current_position.x][current_position.y]][matrix[desired_position.x][desired_position.y]]
+		
+		var current_token = connection_info.Start.get_token_from_this_place()
+		connection_info.End.add_token(current_token)
+		
+		pass
+	pass
+
 
 func start_matrix_size(_lines, _columns):
 	

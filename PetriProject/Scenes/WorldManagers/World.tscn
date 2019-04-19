@@ -21,6 +21,7 @@ editor/display_folded = true
 
 [node name="Camera" type="Camera2D" parent="." index="2"]
 
+position = Vector2( 170.957, 184.038 )
 anchor_mode = 1
 rotating = false
 current = true
