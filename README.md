@@ -10,3 +10,8 @@ Arrow Keys move the character. If you move, you also send a signal for the enemi
 You can move the viewport with the middle mouse button, and get a close up using the mouse wheel scroll. Maximize it for true throwback feels.
 
 The transitions dictionary is always used to check if the connection between places is avaliable, as well as to check that the place isnt occupied.
+
+Techniques employed:
+-Flood Fill Algorithm
+-Petri Network
+-Cellular Automata
