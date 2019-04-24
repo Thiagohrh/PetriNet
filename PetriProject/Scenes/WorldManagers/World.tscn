@@ -23,7 +23,7 @@ editor/display_folded = true
 
 [node name="Camera" type="Camera2D" parent="." index="2"]
 
-position = Vector2( 170.957, 184.038 )
+position = Vector2( 224.957, 205.038 )
 anchor_mode = 1
 rotating = false
 current = true
@@ -59,6 +59,7 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="Panel" type="Panel" parent="CanvasLayer" index="0"]
 
+editor/display_folded = true
 modulate = Color( 0, 0, 0, 1 )
 anchor_left = 0.0
 anchor_top = 0.0
@@ -72,6 +73,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 5 )
 _sections_unfolded = [ "Visibility" ]
+fade_out_to_game = true
 
 [node name="Tween" type="Tween" parent="CanvasLayer/Panel" index="0"]
 

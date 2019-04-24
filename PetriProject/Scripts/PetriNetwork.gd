@@ -87,6 +87,25 @@ func start_board(_map_grid):
 	#print("The Weight of the transition between 0 X 0 and  1 X 0 is: ", ConnectionsDir[matrix[0][0]][matrix[1][0]].Weight)
 	pass
 
+func detele_board():
+	#First delete enemies...
+	for i in $Enemies.get_children():
+		i.queue_free()
+		pass
+	#Second, delete the player....
+	for i in $Players.get_children():
+		i.queue_free()
+	
+	#Third delete all the places....
+	for x in range(matrix.size()):
+		for y in range(matrix[0].size()):
+			matrix[x][y].queue_free()
+			pass
+	
+	#Delete all the references as to start anew...
+	ConnectionsDir = {}
+	pass
+
 func create_transition_from_to(_from, _to):
 	#First calculate all the data thats needed to add to this particular connection.
 	var data = {

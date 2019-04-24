@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/CellularAutomata/CAutomata.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/WallSprites/WallSprite.tscn" type="PackedScene" id=2]
 
-[node name="CAutomata" type="Node2D" index="0"]
+[node name="CAutomata" type="Node2D"]
 
 script = ExtResource( 1 )
 width = 30

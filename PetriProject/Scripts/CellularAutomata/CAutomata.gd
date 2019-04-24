@@ -148,6 +148,10 @@ func SpawnSprites():
 		pass
 	pass
 
+func delete_sprites():
+	for i in $VisualMapHolder.get_children():
+		i.queue_free()
+
 func get_map():
 	return map
 

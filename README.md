@@ -9,6 +9,8 @@ Arrow Keys move the character. If you move, you also send a signal for the enemi
 
 You can move the viewport with the middle mouse button, and get a close up using the mouse wheel scroll. Maximize it for true throwback feels.
 
+Press enter in order to remake the dungeon positioning. It serves as a reboot of the network.
+
 The transitions dictionary is always used to check if the connection between places is avaliable, as well as to check that the place isnt occupied.
 
 Techniques employed:
