@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Tokens/Token.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Sprites/warrior_f.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/warrior_f.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 
@@ -24,17 +25,19 @@ tracks/0/keys = {
 
 [node name="Player" instance=ExtResource( 1 )]
 
+script = ExtResource( 2 )
 _sections_unfolded = [ "Visibility" ]
 
 [node name="Sprite" parent="." index="0"]
 
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 vframes = 4
 hframes = 3
 frame = 8
+region_enabled = false
 region_rect = Rect2( 0, 80, 32, 32 )
-_sections_unfolded = [ "Animation", "Transform", "Visibility" ]
+_sections_unfolded = [ "Animation", "Region", "Transform", "Visibility" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
 

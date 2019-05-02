@@ -5,6 +5,7 @@ export (PackedScene) var Token
 export (PackedScene) var Flag
 export (PackedScene) var Npc
 export (PackedScene) var Player
+export (PackedScene) var Item
 export (PackedScene) var Place
 export (PackedScene) var Transition
 export (PackedScene) var Connection
@@ -82,9 +83,37 @@ func start_board(_map_grid):
 	
 	set_player_on_board()
 	set_enemies_on_board(2)
+	set_itens_on_board(2)
 	#And to test how to access it.... lets do....
 	print("The Amount of connections from Place 1 X 1 is...: ", ConnectionsDir[matrix[1][1]].size())
 	#print("The Weight of the transition between 0 X 0 and  1 X 0 is: ", ConnectionsDir[matrix[0][0]][matrix[1][0]].Weight)
+	pass
+
+func set_itens_on_board(_item_amount):
+	#Sets the number of itens anywhere on the board.
+	print("SETTING THE ITEM ON PLACE")
+	for i in range(_item_amount):
+		
+		randomize()
+		var x = randi() % matrix.size()
+		var y = randi() % matrix[0].size()
+		
+		var chosen_place = matrix[x][y]
+		#A safety check just so it doesnt spawn at an unavaliable place
+		if !chosen_place.check_avaliable():
+			while !chosen_place.check_avaliable():
+				x = randi() % matrix.size()
+				y = randi() % matrix[0].size()
+				chosen_place = matrix[x][y]
+				pass
+			pass
+		print("Item spawn at position X: " , x, " Y: " , y)
+		var new_item = Item.instance()
+		$Itens.add_child(new_item)
+		
+		chosen_place.add_token(new_item)
+		
+		pass
 	pass
 
 func detele_board():

@@ -5,7 +5,8 @@ var possessed_by = null
 var matrix_position = Vector2()
 
 func _ready():
-	add_to_group("item")
+	$AnimationPlayer.play("Idle")
+	add_to_group("player")
 	pass
 
 #func _process(delta):
