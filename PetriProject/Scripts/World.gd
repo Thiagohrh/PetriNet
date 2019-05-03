@@ -13,33 +13,6 @@ func _ready():
 	var map_grid = cell_automata_node.start_map_creation()
 	
 	$PetriNetwork.start_board(map_grid)
-	
-	#print("--------------------EXECUTING PROGRAM----------------------")
-	#Starting the world matrix, with a grid of 3X3
-	#$PetriNetwork.start_matrix_size(3,3)
-	#Create a place in location 0, 0
-	#$PetriNetwork.createPlace(0, 0)
-	#Create a second place in location 0,1
-	#$PetriNetwork.createPlace(0, 1)
-	
-	#Create a TRANSITION between those two places!
-	#$PetriNetwork.createTransition(0)
-	
-	#Create a CONNECTION that should bridge the first PLACE to the first TRANSITION
-	#$PetriNetwork.createConnection($PetriNetwork.getPlace(0, 0),$PetriNetwork.getTransition(0),1,true,false)
-	#Create another CONNECTION, that should bridge the first TRANSITION to the second PLACE
-	#$PetriNetwork.createConnection($PetriNetwork.getPlace(0, 1),$PetriNetwork.getTransition(0),1,false,false)
-	
-	#Put a single token on the first transition in order to test the petriNetwork...
-	#$PetriNetwork.insert_token_in_place(0,0)
-	#$PetriNetwork.insert_token_in_place(0,0)
-	
-	#print("---------------------SETUP DONE--------------------------")
-	#print("------------------STARTING NETWORK!----------------------")
-	#Start the timer with this, and see what happens...
-	
-	#Lets not start the timer by now...what we need to do is create a 30 X 30 matrix, and create all the connections it needs.
-	#$PetriNetwork.start_PetriNetwork()
 	pass
 
 #A basic exit strategy

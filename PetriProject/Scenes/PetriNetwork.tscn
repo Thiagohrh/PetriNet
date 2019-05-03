@@ -1,27 +1,21 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/PetriNetwork.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Tokens/Token.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Tokens/Flag.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Tokens/Npc.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Tokens/Player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Place.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Transition.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Connection.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Tokens/Enemy.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Tokens/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Place.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Tokens/Enemy.tscn" type="PackedScene" id=6]
 
 [node name="PetriNetwork" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 Token = ExtResource( 2 )
 Flag = ExtResource( 3 )
-Npc = ExtResource( 4 )
-Player = ExtResource( 5 )
+Player = ExtResource( 4 )
 Item = null
-Place = ExtResource( 6 )
-Transition = ExtResource( 7 )
-Connection = ExtResource( 8 )
-Enemy = ExtResource( 9 )
+Place = ExtResource( 5 )
+Enemy = ExtResource( 6 )
 
 [node name="Tokens" type="Node" parent="." index="0"]
 
@@ -35,11 +29,7 @@ Enemy = ExtResource( 9 )
 
 [node name="Itens" type="Node" parent="." index="5"]
 
-[node name="Transitions" type="Node" parent="." index="6"]
-
-[node name="Connections" type="Node" parent="." index="7"]
-
-[node name="StepTimer" type="Timer" parent="." index="8"]
+[node name="StepTimer" type="Timer" parent="." index="6"]
 
 process_mode = 1
 wait_time = 1.0
