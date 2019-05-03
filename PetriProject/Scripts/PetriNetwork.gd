@@ -194,6 +194,10 @@ func move_player(_direction):
 		pass
 	
 	move_enemies()
+	#After moving the enemies, I need to apply Dijkstra...so....
+	for i in $Itens.get_children():
+		$DijkstraPathfinder.find_path(matrix[current_position.x][current_position.y], i.get_place_holding_this(), matrix, ConnectionsDir)
+	
 	pass
 
 func set_enemies_on_board(_amount):

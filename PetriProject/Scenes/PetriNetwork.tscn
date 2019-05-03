@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/PetriNetwork.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Tokens/Token.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/Tokens/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Place.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Tokens/Enemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scripts/DijkstraPathfinder.gd" type="Script" id=7]
 
 [node name="PetriNetwork" type="Node2D" index="0"]
 
@@ -29,7 +30,11 @@ Enemy = ExtResource( 6 )
 
 [node name="Itens" type="Node" parent="." index="5"]
 
-[node name="StepTimer" type="Timer" parent="." index="6"]
+[node name="DijkstraPathfinder" type="Node" parent="." index="6"]
+
+script = ExtResource( 7 )
+
+[node name="StepTimer" type="Timer" parent="." index="7"]
 
 process_mode = 1
 wait_time = 1.0
