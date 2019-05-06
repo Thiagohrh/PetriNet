@@ -81,6 +81,16 @@ func start_board(_map_grid):
 	set_player_on_board()
 	set_enemies_on_board(2)
 	set_itens_on_board(2)
+	
+	#Just to show the first paths to the items...
+	var player_coordinates = main_character.get_position_on_grid()
+	
+	#$DijkstraPathfinder.delete_paths()
+	
+	for i in $Itens.get_children():
+		#$DijkstraPathfinder.find_path(matrix[player_coordinates.x][player_coordinates.y], i.get_place_holding_this(), matrix, ConnectionsDir)
+		pass
+	
 	#And to test how to access it.... lets do....
 	print("The Amount of connections from Place 1 X 1 is...: ", ConnectionsDir[matrix[1][1]].size())
 	#print("The Weight of the transition between 0 X 0 and  1 X 0 is: ", ConnectionsDir[matrix[0][0]][matrix[1][0]].Weight)
@@ -134,12 +144,16 @@ func detele_board():
 	
 	#Delete all the references as to start anew...
 	ConnectionsDir = {}
+	
+	#Delete any paths existing...
+	$DijkstraPathfinder.delete_paths()
 	pass
 
 func create_transition_from_to(_from, _to):
 	#First calculate all the data thats needed to add to this particular connection.
+	randomize()
 	var data = {
-		"Weight" : 1,
+		"Weight" : randi() % 5 + 1,
 		"Inhibitor" : false,
 		"Start" : _from,
 		"End" : _to,
@@ -163,6 +177,8 @@ func set_player_on_board():
 	
 	target_place.add_token(main_character)
 	#main_character.set_position_on_grid()
+	
+	
 	pass
 
 func get_first_avaliable_position():
@@ -195,8 +211,9 @@ func move_player(_direction):
 	
 	move_enemies()
 	#After moving the enemies, I need to apply Dijkstra...so....
+	$DijkstraPathfinder.delete_paths()
 	for i in $Itens.get_children():
-		$DijkstraPathfinder.find_path(matrix[current_position.x][current_position.y], i.get_place_holding_this(), matrix, ConnectionsDir)
+		$DijkstraPathfinder.find_path(matrix[desired_position.x][desired_position.y], i.get_place_holding_this(), matrix, ConnectionsDir)
 	
 	pass
 

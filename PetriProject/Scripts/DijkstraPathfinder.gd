@@ -126,6 +126,23 @@ func get_avaliable_places_array(_matrix):
 
 func create_line(_path):
 	#Creates a line renderer as a child node, that uses vertices that have the same position as all the nodes in the _path.
+	var new_line =  Line2D.new()
+	add_child(new_line)
+	new_line.width = 5
+	new_line.set_joint_mode(Line2D.LINE_JOINT_ROUND)
+	new_line.set_begin_cap_mode(Line2D.LINE_CAP_ROUND)
+	new_line.set_end_cap_mode(Line2D.LINE_CAP_ROUND)
+	new_line.set_default_color(Color( 0.54, 0.17, 0.89, 1 ))
+	
+	
+	new_line.set_point_position(0, _path.front().global_position)
+	_path.pop_front()
+	
+	while !_path.empty():
+		new_line.add_point(_path.front().global_position)
+		_path.pop_front()
+		pass
+	
 	
 	pass
 
