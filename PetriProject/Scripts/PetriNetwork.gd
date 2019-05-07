@@ -207,13 +207,16 @@ func move_player(_direction):
 		if connection_info.End.check_token_amount() == 0:
 			var current_token = connection_info.Start.get_token_from_this_place()
 			connection_info.End.add_token(current_token)
+			#Apply Dijkstra in order to pathfind....
+			$DijkstraPathfinder.delete_paths()
+			for i in $Itens.get_children():
+				$DijkstraPathfinder.find_path(matrix[desired_position.x][desired_position.y], i.get_place_holding_this(), matrix, ConnectionsDir)
+			
 		pass
 	
 	move_enemies()
-	#After moving the enemies, I need to apply Dijkstra...so....
-	$DijkstraPathfinder.delete_paths()
-	for i in $Itens.get_children():
-		$DijkstraPathfinder.find_path(matrix[desired_position.x][desired_position.y], i.get_place_holding_this(), matrix, ConnectionsDir)
+	
+	
 	
 	pass
 

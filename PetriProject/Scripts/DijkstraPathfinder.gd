@@ -4,7 +4,7 @@ func find_path(_start_node, _end_node, _matrix, _transition_dict):
 	#Creates a path using a line renderer, from the _start_node to the _end_node, by the Dijkstra algorithm.
 	var path = dijkstra(_start_node, _end_node, _matrix, _transition_dict)
 	#Ok so that works. Now to implement the line renderer between all those nodes up there...
-	create_line(path)
+	#create_line(path)
 	
 	pass
 
@@ -72,6 +72,10 @@ func dijkstra(_start_node, _end_node, _matrix, _transition_dict):
 			pass
 		
 		
+		#Attempt at using a wait function...
+		#yield(get_tree(), "idle_frame")
+		
+		#yield(get_tree().create_timer(0.01), "timeout")
 		#print("Chosen node for this repetition is: " , current_node.name)
 		repetition += 1
 		pass
@@ -94,6 +98,7 @@ func dijkstra(_start_node, _end_node, _matrix, _transition_dict):
 	#Finally, to return the array with the positions in order....
 	final_path = shortest_path_to[_end_node]
 	#print("Is it a problem with path: " , final_path)
+	create_line(final_path)
 	return final_path
 
 func get_possible_neighboors(_current_node, _matrix):

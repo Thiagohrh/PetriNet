@@ -10,7 +10,7 @@
 [ext_resource path="res://Assets/CRTShader/CRTFrame.png" type="Texture" id=8]
 [ext_resource path="res://Sounds/Music from Travis/097 - Touchdown-tris.ogg" type="AudioStream" id=9]
 
-[node name="World" type="Node" index="0"]
+[node name="World" type="Node"]
 
 script = ExtResource( 1 )
 
