@@ -11,5 +11,5 @@ dest_files=[ "res://.import/122 - Job Get!.ogg-2323f0d848a865321f4a51901092b441.
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

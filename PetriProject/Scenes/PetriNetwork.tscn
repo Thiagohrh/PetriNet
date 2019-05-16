@@ -8,7 +8,7 @@
 [ext_resource path="res://Scenes/Tokens/Enemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/DijkstraPathfinder.gd" type="Script" id=7]
 
-[node name="PetriNetwork" type="Node2D" index="0"]
+[node name="PetriNetwork" type="Node2D"]
 
 script = ExtResource( 1 )
 Token = ExtResource( 2 )
@@ -28,11 +28,11 @@ Enemy = ExtResource( 6 )
 
 script = ExtResource( 7 )
 
-[node name="Players" type="Node" parent="." index="4"]
+[node name="Itens" type="Node" parent="." index="4"]
 
-[node name="Enemies" type="Node" parent="." index="5"]
+[node name="Players" type="Node" parent="." index="5"]
 
-[node name="Itens" type="Node" parent="." index="6"]
+[node name="Enemies" type="Node" parent="." index="6"]
 
 [node name="StepTimer" type="Timer" parent="." index="7"]
 

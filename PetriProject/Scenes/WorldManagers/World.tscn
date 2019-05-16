@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/PetriNetwork.tscn" type="PackedScene" id=2]
@@ -9,8 +9,9 @@
 [ext_resource path="res://Assets/CRTShader/Shaders.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/CRTShader/CRTFrame.png" type="Texture" id=8]
 [ext_resource path="res://Sounds/Music from Travis/097 - Touchdown-tris.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Sounds/Music from Travis/121 - Raise.ogg" type="AudioStream" id=10]
 
-[node name="World" type="Node"]
+[node name="World" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
@@ -54,6 +55,7 @@ _sections_unfolded = [ "Limit", "Smoothing" ]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="3"]
 
+editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -112,7 +114,25 @@ volume_db = 0.0
 pitch_scale = 1.0
 autoplay = true
 mix_target = 0
+bus = "BackMusic"
+
+[node name="TimeDelayToNextMatch" type="Timer" parent="." index="5"]
+
+process_mode = 1
+wait_time = 2.5
+one_shot = false
+autostart = false
+
+[node name="GameEnd" type="AudioStreamPlayer2D" parent="." index="6"]
+
+stream = ExtResource( 10 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
 bus = "Master"
+area_mask = 1
 
 [connection signal="tween_completed" from="CanvasLayer/Panel/Tween" to="CanvasLayer/Panel" method="_on_Tween_tween_completed"]
 

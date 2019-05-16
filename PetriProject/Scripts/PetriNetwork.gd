@@ -19,6 +19,8 @@ var columns = 3
 var cicle_time = 1
 
 var main_character = null
+
+signal game_end()
 #Remember the difference!
 #--PLACES--TRANSITIONS--CONNECTIONS
 #PLACES: Hold tokens. Passive like that.
@@ -210,15 +212,38 @@ func move_player(_direction):
 			#Apply Dijkstra in order to pathfind....
 			$DijkstraPathfinder.delete_paths()
 			for i in $Itens.get_children():
-				$DijkstraPathfinder.find_path(matrix[desired_position.x][desired_position.y], i.get_place_holding_this(), matrix, ConnectionsDir)
-			
+				if !i.get_gotten():
+					$DijkstraPathfinder.find_path(matrix[desired_position.x][desired_position.y], i.get_place_holding_this(), matrix, ConnectionsDir)
+		elif connection_info.End.check_token_amount() == 1:
+			#If there is SOMETHING there...Needs to check if that is an ITEM or not.
+			var possible_item = connection_info.End.get_token(0)
+			if possible_item.is_in_group("item"):
+				#If its an item, remove the item from the place in order to empty it up
+				connection_info.End.get_token_from_this_place()
+				#Sets the Item as GOTTEN, in order to trigger a change in sprites and just keeps it into its place.
+				possible_item.set_gotten(true)
+				check_for_game_end()
+				pass
+			pass
 		pass
 	
 	move_enemies()
-	
-	
-	
 	pass
+
+func check_for_game_end():
+	var game_end = false
+	var itens_gotten = 0
+	for i in $Itens.get_children():
+		if i.get_gotten():
+			game_end = true
+			itens_gotten = itens_gotten + 1
+	
+	if game_end and itens_gotten == $Itens.get_child_count():
+		#Should emit a signal that warns the World that the game is over.
+		emit_signal("game_end")
+		pass
+	pass
+
 
 func set_enemies_on_board(_amount):
 	for i in range(_amount):
