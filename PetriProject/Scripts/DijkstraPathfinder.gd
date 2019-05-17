@@ -1,5 +1,96 @@
 extends Node
 
+#Needs an Array() with all of the possible nodes. 
+#For the sake of optimization, make it hold only the avaliable
+#nodes, without havin to worry about the walls.
+var places_inventory = Array()
+#Needs a matrix, in order to hold the possible paths between nodes
+var cost_matrix = Array()
+
+func setup(_matrix, _transition_dict):
+	places_inventory.clear()
+	places_inventory = get_avaliable_places_array(_matrix)
+	
+	#Safety check in order to make sure the matrix is remade
+	if !cost_matrix.empty():
+		for i in cost_matrix:
+			i.clear()
+		cost_matrix.clear()
+		pass
+	
+	setup_matrix(_matrix, _transition_dict)
+	pass
+
+func setup_matrix(_matrix, _transition_dict):
+	cost_matrix.resize(places_inventory.size())
+	for i in range(cost_matrix.size()):
+		cost_matrix[i] = Array()
+		cost_matrix[i].resize(places_inventory.size())
+	
+	for x in range(cost_matrix.size()):
+		for y in range(cost_matrix[0].size()):
+			cost_matrix[x][y] = 99999999
+	
+	#For each avaliable places, gets each of the possible destinations ID
+	#and sets the value of its Weigth into the matrix.
+	var x
+	var y
+	for i in places_inventory:
+		x = i.get_ID()
+		var possible_destinations = _transition_dict[i]
+		for j in possible_destinations.values():
+			if j.Enabled:
+				y = j.End.get_ID()
+				cost_matrix[x][y] = j.Weight
+			pass
+		pass
+	pass
+
+func find_path_2(_start_node, _end_node):
+	var start_id = _start_node.get_ID()
+	var end_id = _end_node.get_ID()
+	
+	var vet_D = cost_matrix[start_id]
+	var vet_P = Array()
+	vet_P.resize(places_inventory.size())
+	
+	var already_checked = Array()
+	
+	for i in range(vet_P.size()):
+		vet_P[i] = start_id
+	
+	#Chose a pivot...
+	var buffer_value# = 99999999
+	var pivot
+	var pivot_base_cost
+	
+	
+	#Chose a pivot------------------
+	while already_checked.size() < vet_D.size():
+		buffer_value = 99999999
+		for i in range(vet_D.size()):
+			if vet_D[i] < buffer_value and !already_checked.has(i):
+				pivot = i
+				pivot_base_cost = vet_D[pivot]
+				buffer_value = pivot_base_cost
+				pass
+		
+		already_checked.append(pivot)
+		
+		for i in range(cost_matrix[pivot].size()):
+			if cost_matrix[pivot][i] < 99999990:
+				vet_D[i] = cost_matrix[pivot][i] + pivot_base_cost
+				vet_P[i] = pivot
+				pass
+			pass
+		
+		#...aaaaand repeat...untill the already checked 1 place smaller than the vet_D.
+		pass
+	
+	print(vet_P)
+	
+	pass
+
 func find_path(_start_node, _end_node, _matrix, _transition_dict):
 	#Creates a path using a line renderer, from the _start_node to the _end_node, by the Dijkstra algorithm.
 	var path = dijkstra(_start_node, _end_node, _matrix, _transition_dict)
@@ -122,11 +213,14 @@ func get_possible_neighboors(_current_node, _matrix):
 
 func get_avaliable_places_array(_matrix):
 	#Returns an array with the avaliable nodes ONLY!
+	var id_buffer = 0
 	var avaliable_places = Array()
 	for x in range(_matrix.size()):
 		for y in range(_matrix[0].size()):
 			if _matrix[x][y].check_avaliable():
+				_matrix[x][y].set_ID(id_buffer)
 				avaliable_places.push_back(_matrix[x][y])
+				id_buffer = id_buffer + 1
 	return avaliable_places
 
 func create_line(_path):
@@ -147,8 +241,6 @@ func create_line(_path):
 		new_line.add_point(_path.front().global_position)
 		_path.pop_front()
 		pass
-	
-	
 	pass
 
 func delete_paths():
