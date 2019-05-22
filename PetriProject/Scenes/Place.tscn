@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/Place.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/16x16_Jerom_CC-BY-SA-3.0.png" type="Texture" id=2]
 
-[node name="Place" type="Node2D"]
+[node name="Place" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -11,7 +11,7 @@ script = ExtResource( 1 )
 
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 32, 80, 16, 16 )
+region_rect = Rect2( 0, 80, 16, 16 )
 _sections_unfolded = [ "Animation", "Offset", "Region", "Visibility" ]
 
 

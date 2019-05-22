@@ -31,9 +31,10 @@ func start_map_creation():
 	#Checks if the map has been created correctly, using the flood fill algorithm.
 	flood_fill_check()
 	if flood_fill_check():
-		print("Flood fill say its ok!")
+		#print("Flood fill say its ok!")
+		pass
 	else:
-		print("Flood fill say its NOT OKAY! Time to redo the map...")
+		#print("Flood fill say its NOT OKAY! Time to redo the map...")
 		while !flood_fill_check():
 			GenerateMap()
 			pass
@@ -85,9 +86,6 @@ func RandomFillMap():
 			pass
 		pass
 	
-	
-	
-	#This is the end of the function...
 	pass
 
 func SmoothMap():
@@ -105,9 +103,6 @@ func SmoothMap():
 			
 			pass
 		pass
-	
-	
-	#This is the end of the function!
 	pass
 
 func GetSurroundingWallCount(gridX, gridY):

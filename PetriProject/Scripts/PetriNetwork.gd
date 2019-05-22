@@ -58,6 +58,8 @@ func start_board(_map_grid):
 			new_place.global_position.y = 0 + y * CELL_HEIGHT
 			if _map_grid[x][y] == 1:
 				matrix[x][y].set_avaliable(false)
+			else:
+				matrix[x][y].set_weight(randi() % 4 + 1)
 	
 	#Now i should create the transitions between all of those places...hmmm...
 	#The theory is to just create transitions of ENTERING another place...so...hmmm....
@@ -94,13 +96,13 @@ func start_board(_map_grid):
 		pass
 	
 	#And to test how to access it.... lets do....
-	print("The Amount of connections from Place 1 X 1 is...: ", ConnectionsDir[matrix[1][1]].size())
+	#print("The Amount of connections from Place 1 X 1 is...: ", ConnectionsDir[matrix[1][1]].size())
 	#print("The Weight of the transition between 0 X 0 and  1 X 0 is: ", ConnectionsDir[matrix[0][0]][matrix[1][0]].Weight)
 	pass
 
 func set_itens_on_board(_item_amount):
 	#Sets the number of itens anywhere on the board.
-	print("SETTING THE ITEM ON PLACE")
+	#print("SETTING THE ITEM ON PLACE")
 	for i in range(_item_amount):
 		
 		randomize()
@@ -116,7 +118,7 @@ func set_itens_on_board(_item_amount):
 				chosen_place = matrix[x][y]
 				pass
 			pass
-		print("Item spawn at position X: " , x, " Y: " , y)
+		#print("Item spawn at position X: " , x, " Y: " , y)
 		var new_item = Item.instance()
 		$Itens.add_child(new_item)
 		
@@ -155,7 +157,7 @@ func create_transition_from_to(_from, _to):
 	#First calculate all the data thats needed to add to this particular connection.
 	randomize()
 	var data = {
-		"Weight" : randi() % 5 + 1,
+		"Weight" : _to.get_weight(),
 		"Inhibitor" : false,
 		"Start" : _from,
 		"End" : _to,
@@ -193,17 +195,17 @@ func get_first_avaliable_position():
 	return null
 
 func move_player(_direction):
-	print("Direction is: ", _direction)
+	#print("Direction is: ", _direction)
 	#First, get the player actual position...
 	
 	var current_position = main_character.get_position_on_grid()
 	var desired_position = main_character.get_position_on_grid() + _direction
 	
-	print("The player is in position: ",current_position, " and wants to go to position: " , desired_position)
+	#print("The player is in position: ",current_position, " and wants to go to position: " , desired_position)
 	
 	#Ok, so far so good...now....in order to check that particular transition....
 	if ConnectionsDir[matrix[current_position.x][current_position.y]][matrix[desired_position.x][desired_position.y]].Enabled:
-		print("Checked and....its avaliable!")
+		#print("Checked and....its avaliable!")
 		#Ok, so i know its avaliable...hmmm...
 		var connection_info = ConnectionsDir[matrix[current_position.x][current_position.y]][matrix[desired_position.x][desired_position.y]]
 		if connection_info.End.check_token_amount() == 0:
@@ -251,7 +253,7 @@ func set_enemies_on_board(_amount):
 		randomize()
 		var x = randi() % matrix.size()
 		var y = randi() % matrix[0].size()
-		print("Would spawn at position X: " , x, " Y: " , y)
+		#print("Would spawn at position X: " , x, " Y: " , y)
 		var chosen_place = matrix[x][y]
 		#A safety check just so it doesnt spawn at an unavaliable place
 		if !chosen_place.check_avaliable():
@@ -275,11 +277,11 @@ func move_enemies():
 		var current_position = i.get_position_on_grid()
 		var desired_position = i.get_position_on_grid() + i.get_new_direction_intent()
 		
-		print("The Enemy is in position: ",current_position, " and wants to go to position: " , desired_position)
+		#print("The Enemy is in position: ",current_position, " and wants to go to position: " , desired_position)
 		
 		#Ok, so far so good...now....in order to check that particular transition....
 		if ConnectionsDir[matrix[current_position.x][current_position.y]][matrix[desired_position.x][desired_position.y]].Enabled:
-			print("Checked and....its avaliable!")
+			#print("Checked and....its avaliable!")
 			#Ok, so i know its avaliable...hmmm...
 			
 			var connection_info = ConnectionsDir[matrix[current_position.x][current_position.y]][matrix[desired_position.x][desired_position.y]]
@@ -289,22 +291,3 @@ func move_enemies():
 			
 		pass
 	pass
-
-
-func execute_cicle():
-	#Goes through out all the network identifying all TRANSITIONS that are active, and executing them.
-	print("----------------------NOT DOING ANYTHING!----------------------")
-	pass
-
-func _on_StepTimer_timeout():
-	#Use this function to call execute_cicle! That way, the steps are separated in chunks of time.
-	execute_cicle()
-	pass # replace with function body
-
-#I have a feeling i will need these...
-func start_PetriNetwork():
-	$StepTimer.start()
-	print("PetriNetwork has been STARTED")
-func stop_PetriNetwork():
-	$StepTimer.stop()
-	print("PetriNetwork has been STOPPED")
