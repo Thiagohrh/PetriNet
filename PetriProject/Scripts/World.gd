@@ -63,8 +63,8 @@ func game_ended():
 	$TimeDelayToNextMatch.start()
 	yield($TimeDelayToNextMatch,"timeout")
 	$GameEnd.play()
-	$TimeDelayToNextMatch.start()
-	yield($TimeDelayToNextMatch,"timeout")
+	$AnimationPlayer.play("GameWin")
+	yield($AnimationPlayer, "animation_finished")
 	can_move = true
 	restart_game()
 	pass
