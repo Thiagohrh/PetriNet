@@ -140,7 +140,7 @@ func create_line(_path):
 	new_line.set_default_color(Color( 0.54, 0.17, 0.89, 1 ))
 	
 	
-	new_line.set_point_position(0, _path.front().global_position)
+	#new_line.set_point_position(0, _path.front().global_position)
 	_path.pop_front()
 	
 	while !_path.empty():
