@@ -110,7 +110,6 @@ func GetSurroundingWallCount(gridX, gridY):
 	var wallCount = 0
 	#for i in range(2, 5):
 	#	print(i)
-	
 	for neighbourX in range(gridX - 1, gridX + 2):
 		for neighbourY in range(gridY - 1, gridY + 2):
 			if neighbourX >= 0 && neighbourX < width && neighbourY >= 0 && neighbourY < height:

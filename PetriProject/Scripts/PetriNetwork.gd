@@ -35,7 +35,7 @@ var ConnectionsDir = {} #A dictionary, made to hold all the info about transitio
 func _ready():
 	pass
 
-func start_board(_map_grid):
+func start_board(_map_grid, _cost_grid):
 	lines = _map_grid.size()
 	columns = _map_grid[0].size()
 	
@@ -59,7 +59,7 @@ func start_board(_map_grid):
 			if _map_grid[x][y] == 1:
 				matrix[x][y].set_avaliable(false)
 			else:
-				matrix[x][y].set_weight(randi() % 4 + 1)
+				matrix[x][y].set_weight(_cost_grid[x][y])
 	
 	#Now i should create the transitions between all of those places...hmmm...
 	#The theory is to just create transitions of ENTERING another place...so...hmmm....

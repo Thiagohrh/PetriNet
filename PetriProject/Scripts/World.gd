@@ -13,10 +13,11 @@ func _ready():
 	#Should assemble all of the network in here, as a sequencial instruction. The PetriNetwork will do the rest...
 	#Get this and pass it to the PetriNetwork node in order to instantiate the places in the correct grid.
 	var map_grid = cell_automata_node.start_map_creation()
+	var cost_grid = $CostCellAutomata.start_cost_matrix()
 	
 	$PetriNetwork.connect("game_end", self, "game_ended")
 	
-	$PetriNetwork.start_board(map_grid)
+	$PetriNetwork.start_board(map_grid, cost_grid)
 	pass
 
 #A basic exit strategy
@@ -47,9 +48,12 @@ func restart_game():
 	$PetriNetwork.detele_board()
 	#Should also delete the sprites of the CAutomata....
 	$CAutomata.delete_sprites()
+	#Delete the cost matrix...
+	$CostCellAutomata.delete_cost_matrix()
 	#Then recreate the whole thing...
 	var map_grid = cell_automata_node.start_map_creation()
-	$PetriNetwork.start_board(map_grid)
+	var cost_grid = $CostCellAutomata.start_cost_matrix()
+	$PetriNetwork.start_board(map_grid, cost_grid)
 	#And make the fade work again in order to bring everything back....
 	fade_panel.fade_out_to_game()
 	
