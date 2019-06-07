@@ -52,7 +52,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0, 0.132813, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0.132813, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0.132813, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="World" type="Node" index="0"]
+[node name="World" type="Node"]
 
 script = ExtResource( 1 )
 

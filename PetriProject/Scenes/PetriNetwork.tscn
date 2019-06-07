@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/PetriNetwork.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Tokens/Token.tscn" type="PackedScene" id=2]
@@ -7,8 +7,9 @@
 [ext_resource path="res://Scenes/Place.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Tokens/Enemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/DijkstraPathfinder.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/RNG.gd" type="Script" id=8]
 
-[node name="PetriNetwork" type="Node2D"]
+[node name="PetriNetwork" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 Token = ExtResource( 2 )
@@ -39,6 +40,17 @@ script = ExtResource( 7 )
 process_mode = 1
 wait_time = 1.0
 one_shot = false
+autostart = false
+
+[node name="RNG" type="Node" parent="." index="8"]
+
+script = ExtResource( 8 )
+
+[node name="SurpriseTimer" type="Timer" parent="." index="9"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
 autostart = false
 
 
