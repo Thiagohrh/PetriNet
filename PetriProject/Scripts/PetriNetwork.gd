@@ -300,7 +300,7 @@ func move_enemies():
 func surprise_event_trigger():
 	while running_coroutine:
 		var random_number = $RNG.get_random_number()
-		print(random_number)
+		#print(random_number)
 		$SurpriseTimer.wait_time = random_number
 		$SurpriseTimer.start()
 		yield($SurpriseTimer, "timeout")
