@@ -36,7 +36,7 @@ var ConnectionsDir = {} #A dictionary, made to hold all the info about transitio
 
 func _ready():
 	running_coroutine = true
-	surprise_event_trigger()
+	#surprise_event_trigger()
 	pass
 
 func start_board(_map_grid, _cost_grid):
@@ -89,6 +89,7 @@ func start_board(_map_grid, _cost_grid):
 	set_player_on_board()
 	set_enemies_on_board(2)
 	set_itens_on_board(2)
+	surprise_event_trigger()
 	
 	#Just to show the first paths to the items...
 	var player_coordinates = main_character.get_position_on_grid()
@@ -187,7 +188,6 @@ func set_player_on_board():
 	target_place.add_token(main_character)
 	#main_character.set_position_on_grid()
 	running_coroutine = true
-	surprise_event_trigger()
 	pass
 
 func get_first_avaliable_position():
@@ -299,8 +299,10 @@ func move_enemies():
 
 func surprise_event_trigger():
 	while running_coroutine:
-		var random_number = $RNG.get_random_number()
-		#print(random_number)
+		var random_number = $RNG.get_normal(5, 2)
+		while random_number <= 0:
+			random_number = $RNG.get_normal(5, 2)
+		print(random_number)
 		$SurpriseTimer.wait_time = random_number
 		$SurpriseTimer.start()
 		yield($SurpriseTimer, "timeout")
@@ -310,5 +312,5 @@ func surprise_event_trigger():
 	pass
 
 func do_surprise_event():
-	#print("KABUM!")
+	print("KABUM!")
 	pass
