@@ -46,7 +46,7 @@ func dijkstra(_start_node, _end_node, _matrix, _transition_dict):
 		#var neighbours = current_node.get_neighbours()
 		for j in neighbours:
 			if !j.check_visited():
-				var weight_from_to = _transition_dict[current_node][j].Weight
+				var weight_from_to = _transition_dict[current_node][j].End.get_weight()
 				var distance_buffer = current_node.get_min_distance() + weight_from_to
 				#print("distance buffer here is...", distance_buffer)
 				if distance_buffer < j.get_min_distance():

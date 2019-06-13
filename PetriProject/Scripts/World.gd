@@ -16,6 +16,7 @@ func _ready():
 	var cost_grid = $CostCellAutomata.start_cost_matrix()
 	
 	$PetriNetwork.connect("game_end", self, "game_ended")
+	$PetriNetwork.connect("volcano_spawned", $Camera/Shaker, "shake")
 	
 	$PetriNetwork.start_board(map_grid, cost_grid)
 	pass

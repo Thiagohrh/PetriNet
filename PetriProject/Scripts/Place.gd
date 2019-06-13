@@ -77,9 +77,15 @@ func get_min_distance():
 	return min_distance
 func set_weight(_amount):
 	weight = _amount
-	var _x = 16 * (_amount - 1)
-	start_sprite_region.x = _x
-	$Sprite.region_rect = Rect2(start_sprite_region, sprite_size)
+	if _amount < 10:
+		var _x = 16 * (_amount - 1)
+		start_sprite_region.x = _x
+		$Sprite.region_rect = Rect2(start_sprite_region, sprite_size)
+		pass
+	else:
+		var crack_position = Vector2(64,96)
+		$Sprite.region_rect = Rect2(crack_position, sprite_size)
+		pass
 	pass
 
 func get_weight():

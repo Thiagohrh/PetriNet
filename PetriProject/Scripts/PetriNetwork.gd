@@ -24,6 +24,7 @@ var running_coroutine = false
 var main_character = null
 
 signal game_end()
+signal volcano_spawned()
 #Remember the difference!
 #--PLACES--TRANSITIONS--CONNECTIONS
 #PLACES: Hold tokens. Passive like that.
@@ -135,6 +136,7 @@ func set_itens_on_board(_item_amount):
 
 func detele_board():
 	running_coroutine = false
+	$SurpriseTimer.stop()
 	#First delete enemies...
 	for i in $Enemies.get_children():
 		i.queue_free()
@@ -158,6 +160,10 @@ func detele_board():
 	
 	#Delete any paths existing...
 	$DijkstraPathfinder.delete_paths()
+	
+	#Delete any volcanoes...
+	for i in $Volcanoes.get_children():
+		i.queue_free()
 	pass
 
 func create_transition_from_to(_from, _to):
@@ -332,8 +338,10 @@ func spawn_volcano():
 			pass
 		pass
 	
+	chosen_place.set_weight(10)
 	var new_volcano = Volcano.instance()
 	$Volcanoes.add_child(new_volcano)
 	new_volcano.set_instant_destination_node(chosen_place)
 	new_volcano.start_volcano()
+	emit_signal("volcano_spawned")
 	pass

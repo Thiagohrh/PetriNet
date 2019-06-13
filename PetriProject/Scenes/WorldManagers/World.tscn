@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/PetriNetwork.tscn" type="PackedScene" id=2]
@@ -7,19 +7,20 @@
 [ext_resource path="res://Scenes/CellularAutomata/CAutomata.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/CellularAutomata/CostCellAutomata.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/ScrollCamera/Camera.gd" type="Script" id=7]
-[ext_resource path="res://Fonts/Pixeled.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://Scripts/FadeInPannel.gd" type="Script" id=9]
-[ext_resource path="res://Assets/CRTShader/Shaders.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Assets/CRTShader/CRTFrame.png" type="Texture" id=11]
-[ext_resource path="res://Sounds/Music from Travis/097 - Touchdown-tris.ogg" type="AudioStream" id=12]
-[ext_resource path="res://Sounds/Music from Travis/121 - Raise.ogg" type="AudioStream" id=13]
+[ext_resource path="res://Scenes/Shaker.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Fonts/Pixeled.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Scripts/FadeInPannel.gd" type="Script" id=10]
+[ext_resource path="res://Assets/CRTShader/Shaders.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/CRTShader/CRTFrame.png" type="Texture" id=12]
+[ext_resource path="res://Sounds/Music from Travis/097 - Touchdown-tris.ogg" type="AudioStream" id=13]
+[ext_resource path="res://Sounds/Music from Travis/121 - Raise.ogg" type="AudioStream" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 
 size = 80
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 8 )
+font_data = ExtResource( 9 )
 _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="Animation" id=2]
@@ -100,6 +101,8 @@ editor_draw_drag_margin = false
 script = ExtResource( 7 )
 _sections_unfolded = [ "Limit", "Smoothing" ]
 
+[node name="Shaker" parent="Camera" index="0" instance=ExtResource( 8 )]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="4"]
 
 layer = 1
@@ -146,7 +149,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 9 )
+script = ExtResource( 10 )
 _sections_unfolded = [ "Visibility" ]
 fade_out_to_game = true
 
@@ -159,7 +162,7 @@ playback/active = false
 playback/repeat = false
 playback/speed = 1.0
 
-[node name="Shaders" parent="CanvasLayer" index="2" instance=ExtResource( 10 )]
+[node name="Shaders" parent="CanvasLayer" index="2" instance=ExtResource( 11 )]
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer" index="3"]
 
@@ -173,13 +176,13 @@ mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 11 )
+texture = ExtResource( 12 )
 expand = true
 stretch_mode = 0
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="." index="5"]
 
-stream = ExtResource( 12 )
+stream = ExtResource( 13 )
 volume_db = 0.0
 pitch_scale = 1.0
 autoplay = true
@@ -195,7 +198,7 @@ autostart = false
 
 [node name="GameEnd" type="AudioStreamPlayer2D" parent="." index="7"]
 
-stream = ExtResource( 13 )
+stream = ExtResource( 14 )
 volume_db = 0.0
 pitch_scale = 1.0
 autoplay = false
