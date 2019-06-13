@@ -18,6 +18,7 @@ Player = ExtResource( 4 )
 Item = null
 Place = ExtResource( 5 )
 Enemy = ExtResource( 6 )
+Volcano = null
 
 [node name="Tokens" type="Node" parent="." index="0"]
 
@@ -35,18 +36,20 @@ script = ExtResource( 7 )
 
 [node name="Enemies" type="Node" parent="." index="6"]
 
-[node name="StepTimer" type="Timer" parent="." index="7"]
+[node name="Volcanoes" type="Node" parent="." index="7"]
+
+[node name="StepTimer" type="Timer" parent="." index="8"]
 
 process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="RNG" type="Node" parent="." index="8"]
+[node name="RNG" type="Node" parent="." index="9"]
 
 script = ExtResource( 8 )
 
-[node name="SurpriseTimer" type="Timer" parent="." index="9"]
+[node name="SurpriseTimer" type="Timer" parent="." index="10"]
 
 process_mode = 1
 wait_time = 1.0

@@ -7,6 +7,7 @@ export (PackedScene) var Player
 export (PackedScene) var Item
 export (PackedScene) var Place
 export (PackedScene) var Enemy
+export (PackedScene) var Volcano
 #Should have some prefabs here...
 
 const CELL_HEIGHT = 16
@@ -302,7 +303,7 @@ func surprise_event_trigger():
 		var random_number = $RNG.get_normal(5, 2)
 		while random_number <= 0:
 			random_number = $RNG.get_normal(5, 2)
-		print(random_number)
+		#print(random_number)
 		$SurpriseTimer.wait_time = random_number
 		$SurpriseTimer.start()
 		yield($SurpriseTimer, "timeout")
@@ -312,5 +313,27 @@ func surprise_event_trigger():
 	pass
 
 func do_surprise_event():
-	print("KABUM!")
+	spawn_volcano()
+	pass
+
+func spawn_volcano():
+	#Choose a random position...
+	randomize()
+	var x = randi() % matrix.size()
+	var y = randi() % matrix[0].size()
+	#print("Would spawn at position X: " , x, " Y: " , y)
+	var chosen_place = matrix[x][y]
+	#A safety check just so it doesnt spawn at an unavaliable place
+	if !chosen_place.check_avaliable():
+		while !chosen_place.check_avaliable():
+			x = randi() % matrix.size()
+			y = randi() % matrix[0].size()
+			chosen_place = matrix[x][y]
+			pass
+		pass
+	
+	var new_volcano = Volcano.instance()
+	$Volcanoes.add_child(new_volcano)
+	new_volcano.set_instant_destination_node(chosen_place)
+	new_volcano.start_volcano()
 	pass

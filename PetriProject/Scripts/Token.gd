@@ -4,6 +4,7 @@ var cell_size = 32
 var possessed_by = null
 var matrix_position = Vector2()
 
+
 func _ready():
 	add_to_group("item")
 	pass
@@ -26,6 +27,11 @@ func set_position_on_grid(_x, _y):
 func get_position_on_grid():
 	return matrix_position
 
+func set_instant_destination_node(_node):
+	possessed_by = _node
+	global_position = _node.global_position
+	pass
+
 func set_destination_node(_node):
 	possessed_by = _node
 	if $MovementTween.is_processing():
@@ -34,3 +40,4 @@ func set_destination_node(_node):
 	$MovementTween.interpolate_property(self,"global_position", global_position, possessed_by.global_position, 0.5,Tween.TRANS_LINEAR,Tween.EASE_IN_OUT,0)
 	$MovementTween.start()
 	pass
+
