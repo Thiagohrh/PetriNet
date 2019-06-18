@@ -2,6 +2,7 @@ extends Node
 
 onready var cell_automata_node = get_node("CAutomata")
 onready var fade_panel = get_node("CanvasLayer/Panel")
+onready var shaders = get_node("CanvasLayer/Shaders")
 
 var can_move = true
 
@@ -40,6 +41,11 @@ func _input(event):
 			$PetriNetwork.move_player(Vector2(1,0))
 		elif Input.is_action_just_pressed("ui_accept"):
 			restart_game()
+		elif Input.is_action_just_pressed("ui_shader"):
+			if shaders.visible:
+				shaders.hide()
+			else:
+				shaders.show()
 		pass
 
 func restart_game():

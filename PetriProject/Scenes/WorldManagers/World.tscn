@@ -164,6 +164,8 @@ playback/speed = 1.0
 
 [node name="Shaders" parent="CanvasLayer" index="2" instance=ExtResource( 11 )]
 
+visible = false
+
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer" index="3"]
 
 anchor_left = 0.0
